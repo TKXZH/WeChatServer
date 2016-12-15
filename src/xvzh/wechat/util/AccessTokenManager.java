@@ -16,8 +16,8 @@ public class AccessTokenManager {
 	//private static final String AppID = "wx66f32c4a6df1aef7";
 	//private static final String AppSecret = "f6e905816ef8974e44babf7b2f86a620";
 	
-	private static final String TestAppID = "wx3945d8eb3276f3d1";
-	private static final String TestAppSecret = "f618c5e6e5dd59a363944be427a1583c";
+	private static final String TestAppID = "";
+	private static final String TestAppSecret = "";
 	private static AccessToken accessToken;
 	
 	public static String getAccessToken() throws Exception {
