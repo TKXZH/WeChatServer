@@ -68,7 +68,7 @@ public class ClientCustomSSL {
 	}
 	
 	public static byte[] getRealTimePic() throws Exception {
-		String url = "http://192.168.1.109:8080/?action=snapshot";
+		String url = "http://127.0.0.1:8080?action=snapshot";
 		HttpGet httpGet = new HttpGet(url);
 		HttpResponse response = HttpClientFactory.getHttpClient().execute(httpGet);
 		byte[] pic = StreamUtil.File2byte(response.getEntity().getContent());

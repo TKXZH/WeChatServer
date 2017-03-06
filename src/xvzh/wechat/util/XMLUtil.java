@@ -34,7 +34,7 @@ public class XMLUtil {
         return result;
 	}
 	
-	public static Object XML2Jaxb(String xml, Class jabxClass) throws JAXBException {
+	public static Object XML2Jaxb(String xml, Class<?> jabxClass) throws JAXBException {
 		JAXBContext jaxbContext = JAXBContext.newInstance(jabxClass);  
 		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 		

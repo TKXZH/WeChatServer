@@ -6,6 +6,7 @@ import xvzh.http.HttpRequest;
 import xvzh.http.HttpResponse;
 import xvzh.sensor.DHT11;
 import xvzh.sensor.HCSR501;
+import xvzh.sensor.RELAY;
 import xvzh.sensor.ULN2003;
 import xvzh.wechat.event.ClickEvent;
 import xvzh.wechat.event.Event;
@@ -51,6 +52,10 @@ public class MessageServiceHttpApi {
 				}
 				TextMessageReply textMessageReply = new TextMessageReply(clickEvent.getFromUserName(), clickEvent.getToUserName(), "人体感应:"+string);
 				responseStr = XMLUtil.jaxb2XML(textMessageReply);
+			} 
+			if(clickEvent.getEventKey().equals("xvzh4")) {
+				RELAY relay = RELAY.getInstance(29);
+				relay.change();
 			} 
 			if(clickEvent.getEventKey().equals("xvzh5")) {
 				ULN2003 uln2003 = ULN2003.getInstance(1,2,3,4);

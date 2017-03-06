@@ -1,6 +1,5 @@
 package xvzh.servlets;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Method;
@@ -19,7 +18,6 @@ import xvzh.http.HttpResponse;
 import xvzh.servlets.protocol.AuthedProtocol;
 import xvzh.servlets.protocol.DefaultProtocol;
 import xvzh.servlets.protocol.Protocol;
-import xvzh.test.test1;
 
 public class WeChatServlet extends HttpServlet{
 	
