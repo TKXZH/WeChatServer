@@ -1,10 +1,10 @@
 package xvzh.test;
 
-import java.net.URL;
+import java.util.Date;
 
 public class test1 {
 	public static void main(String args[]) {
-		URL url = test1.class.getResource("/");
-		System.out.println(url);
+		Date now = new Date();
+		System.out.println(now.getTime());
 	}
 }

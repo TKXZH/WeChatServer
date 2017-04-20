@@ -7,17 +7,17 @@ import java.io.InputStream;
 
 public class StreamUtil {
 	public static String Inputstr2Str_byteArr(InputStream in, String encode)  
-	   {  
-	       StringBuffer sb = new StringBuffer();  
-	       byte[] b = new byte[1024];  
-	       int len = 0;  
+	   {
+	       StringBuffer sb = new StringBuffer();
+	       byte[] b = new byte[1024];
+	       int len = 0;
 	       try  
 	       {  
 	           if (encode == null || encode.equals(""))  
-	           {  
+	           {
 	               // 默认以utf-8形式  
 	               encode = "utf-8";  
-	           }  
+	           }
 	           while ((len = in.read(b)) != -1)  
 	           {  
 	               sb.append(new String(b, 0, len, encode));  

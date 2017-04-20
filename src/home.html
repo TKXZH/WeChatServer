@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts-all-3.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+    <script type="text/javascript" src="http://xvzonghui.top/js/refresh.js"></script>
+    <script type="text/javascript" src="http://xvzonghui.top/js/picture.js"></script>
+    <style type="text/css">
+        #data td {
+            font-size: x-large;
+            color: lightslategray;
+            vertical-align: middle;
+            text-align: center
+        }
+        #data th {
+            vertical-align: middle;
+            text-align: center
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class="page-header text-center">
+                <h3>传感器信息的微信实时发布与查询系统设计与实现
+                </h3>
+            </div>
+            <table id="data" class="table table-hover table-striped table-bordered">
+                <caption>数据监测</caption>
+                <thead>
+                <tr>
+                    <th ><span id="temperatureIcon" class="glyphicon glyphicon-certificate"></span>  温度传感器(实时)</th>
+                    <th ><span id="humidityIcon" class="glyphicon glyphicon-fire"></span>  湿度传感器(实时)</th>
+                    <th ><span id="humanIcon" class="glyphicon glyphicon-eye-open"></span>  人体红外传感器(实时)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr >
+                    <td id="temperature">30C </td>
+                    <td id="humidity">50 </td>
+                    <td id="human">无人 </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="col-md-1"></div>
+            <script>
+                var address = 'http://192.168.137.77/wechat/sensor';
+                var myTable = {
+                    setTemperature : function (temperature) {
+                        $("#temperature").text(temperature);
+                    },
+                    setHumidity : function (humidity) {
+                        $("#humidity").text(humidity);
+                    },
+                    setHuman : function (human) {
+                        $("#human").text(human);
+                    }
+                };
+                var mySensor = {
+                    refreshTable : function () {
+                        $.getJSON(
+                            address,
+                            function (json) {
+                                var temperature = $("#temperature");
+                                var humidity = $("#humidity");
+                                var human = $("#human");
+                                var temperatureNow = json.temperature;
+                                var humidityNow = json.humidity;
+                                var humanNow = json.humanStatus;
+                                var flash = function (jqueryObj) {
+                                    jqueryObj.addClass("danger").removeClass("danger");
+                                };
+                                if(temperature.text() != temperatureNow) {
+                                    flash(temperature);
+                                }
+                                if(humidity.text() != humanNow) {
+                                    flash(humidity);
+                                }
+                                if(human.text() != humanNow) {
+                                    flash(humidity)
+                                }
+                                myTable.setTemperature(temperatureNow);
+                                myTable.setHumidity(humidityNow);
+                                myTable.setHuman(humanNow);
+                            }
+                        );
+                    }
+                };
+                //每三秒刷新一次传感器数据
+                setInterval(mySensor.refreshTable, 3000);
+            </script>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div id="pic" style="height: 350px">
+            </div>
+            <script type="text/javascript">
+                var dom = document.getElementById("pic");
+                var myChart = echarts.init(dom);
+                option = null;
+                data = [];
+                function refreshChart() {
+                    var now = new Date();
+                    $.getJSON(
+                        'http://192.168.137.77/wechat/sensor',
+                        function (temp) {
+                            if(data.length >= 100) {
+                                data.shift();
+                                data.push(
+                                    {
+                                        name: '数据',
+                                        value: [
+                                            now,
+                                            temp.humidity
+                                        ]
+                                    }
+                                );
+                            } else {
+                                data.push(
+                                    {
+                                        name: '湿度',
+                                        value: [
+                                            now,
+                                            temp.humidity
+                                        ]
+                                    }
+                                );
+                            }
+                            myChart.setOption({
+                                series: [{
+                                    data: data
+                                }]
+                            });
+                        }
+                    );
+                }
+
+                option = {
+                    title: {
+                        text: '动态数据 + 时间坐标轴'
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {
+                            animation: false
+                        }
+                    },
+                    xAxis: {
+                        type: 'time',
+                        splitLine: {
+                            show: false
+                        }
+                    },
+                    yAxis: {
+                        type: 'value',
+                        boundaryGap: [0, '100%'],
+                        splitLine: {
+                            show: false
+                        }
+                    },
+                    series: [{
+                        name: '数据',
+                        type: 'line',
+                        showSymbol: false,
+                        hoverAnimation: false,
+                        data: data
+                    }]
+                };
+                if (option && typeof option === "object") {
+                    myChart.setOption(option, true);
+                }
+                setInterval(function () {
+                    refreshChart();
+                }, 2000);
+
+            </script>
+        </div>
+        <div class="col-md-1">
+        </div>
+    </div>
+</div>
+</body>
+</html>

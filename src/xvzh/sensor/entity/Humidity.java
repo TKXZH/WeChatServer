@@ -10,7 +10,9 @@ import java.util.Date;
 public class Humidity {
 	private float humidity;
 	private Date time;
-	
+	public Humidity() {
+		super();
+	}
 	public Humidity(float humidity) {
 		this.humidity = humidity;
 		this.time = new Date();
@@ -22,5 +24,10 @@ public class Humidity {
 	public Date getTime() {
 		return time;
 	}
-
+	public void setHumidity(float humidity) {
+		this.humidity = humidity;
+	}
+	public void setTime(Date time) {
+		this.time = time;
+	}
 }

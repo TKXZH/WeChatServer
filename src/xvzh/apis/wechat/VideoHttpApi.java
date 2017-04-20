@@ -29,7 +29,7 @@ public class VideoHttpApi {
 				"img.style.zIndex = -1;"+
 				"img.onload = imageOnload;"+
 				"img.onclick = imageOnclick;"+
-				"img.src = \"http://192.168.1.102:8080/?action=snapshot&n=\" + (++imageNr);"+
+				"img.src = \"http://xvzh1.tunnel.qydev.com?action=snapshot&n=\" + (++imageNr);"+
 				"var webcam = document.getElementById(\"webcam\");"+
 				"webcam.insertBefore(img, webcam.firstChild);"+
 				"}"+
@@ -53,7 +53,7 @@ public class VideoHttpApi {
 				"</script>"+
 				"<body onload=\"createImageLayer();\">"+
 
-				"<div id=\"webcam\"><noscript><img src=\"http://192.168.1.108:8080/?action=snapshot\" height=\"1000px\" width=\"2000px\"/></noscript></div>"+
+				"<div id=\"webcam\"><noscript><img src=\"http://xvzh.tunnel.qydev.com:8080/?action=snapshot\" height=\"1000px\" width=\"2000px\"/></noscript></div>"+
 
 				"</body>"+
 				"</html>";

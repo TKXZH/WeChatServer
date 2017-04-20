@@ -1,9 +1,6 @@
 package xvzh.sensor.test;
 
 import java.io.IOException;
-
-import javax.management.timer.Timer;
-
 import xvzh.sensor.dao.HumanDao;
 import xvzh.timer.FrequencyEnum;
 import xvzh.timer.SensorPersistenceTask;
@@ -14,4 +11,5 @@ public class Main {
 		HumanDao.insert(true);
 		new TimerController(new SensorPersistenceTask(FrequencyEnum.high)).start();
 	}
+	
 }

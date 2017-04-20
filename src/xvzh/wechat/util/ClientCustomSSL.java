@@ -2,6 +2,7 @@ package xvzh.wechat.util;
 
 import java.io.File;
 import java.net.URI;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -12,6 +13,7 @@ import org.apache.http.entity.mime.content.ByteArrayBody;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.util.EntityUtils;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
 /**
@@ -42,7 +44,7 @@ public class ClientCustomSSL {
 		HttpClient httpClient = HttpClientFactory.getHttpClient();
 		HttpResponse response = httpClient.execute(httppost);
 		String responseStr = EntityUtils.toString(response.getEntity());
-		String media_id = (String)JSONObject.parseObject(responseStr).get("media_id");
+		String media_id = (String)JSON.parseObject(responseStr).get("media_id");
 		return media_id;
 	}
 	
@@ -63,7 +65,7 @@ public class ClientCustomSSL {
 		HttpClient httpClient = HttpClientFactory.getHttpClient();
 		HttpResponse response = httpClient.execute(httppost);
 		String responseStr = EntityUtils.toString(response.getEntity());
-		String media_id = (String)JSONObject.parseObject(responseStr).get("media_id");
+		String media_id = (String)JSON.parseObject(responseStr).get("media_id");
 		return media_id;
 	}
 	

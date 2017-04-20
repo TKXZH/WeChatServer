@@ -2,6 +2,8 @@ package xvzh.server;
 
 import xvzh.apis.wechat.JsonHttpApi;
 import xvzh.apis.wechat.MessageServiceHttpApi;
+import xvzh.apis.wechat.StaticFileHttpApi;
+import xvzh.apis.wechat.VideoHttpApi;
 import xvzh.servlets.WeChatServlet;
 
 public class Init {
@@ -9,5 +11,7 @@ public class Init {
 	public static void init() throws InstantiationException, IllegalAccessException {
 		WeChatServlet.getInstance().registApi(MessageServiceHttpApi.class);
 		WeChatServlet.getInstance().registApi(JsonHttpApi.class);
+		WeChatServlet.getInstance().registApi(VideoHttpApi.class);
+		WeChatServlet.getInstance().registApi(StaticFileHttpApi.class);
 	}
 }

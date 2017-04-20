@@ -9,7 +9,9 @@ import java.util.Date;
 public class Human {
 	private boolean status;
 	private Date timeDate;
-	
+	public Human() {
+		super();
+	}
 	public Human(boolean status) {
 		this.status = status;
 		this.timeDate = new Date();
@@ -22,4 +24,11 @@ public class Human {
 	public Date getTimeDate() {
 		return timeDate;
 	}
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+	public void setTimeDate(Date timeDate) {
+		this.timeDate = timeDate;
+	}
+	
 }

@@ -63,7 +63,40 @@ public class ULN2003 {
 	public synchronized void turnRight() {
 		motor.rotate(-0.25);
 	}
-
+	
+	public void forwardWithLowSpeed() {
+		motor.setStepInterval(7);
+		motor.forward();
+	}
+	
+	public void forWardWithModerateSpeed() {
+		motor.setStepInterval(5);
+		motor.forward();
+	}
+	
+	public void forWardWithHighSpeed() {
+		motor.setStepInterval(3);
+		motor.forward();
+	}
+	
+	public void reverseWithLowSpeed() {
+		motor.setStepInterval(7);
+		motor.reverse();
+	}
+	
+	public void reverseWithModerateSpeed() {
+		motor.setStepInterval(5);
+		motor.reverse();
+	}
+	
+	public void reverseWithHighSpeed() {
+		motor.setStepInterval(3);
+		motor.reverse();
+	}
+	
+	public void stop() {
+		motor.stop();
+	}
 	public static void main(String args[]) throws Exception {
 		ULN2003 uln2003 = ULN2003.getInstance(1, 2, 3, 4);
 		uln2003.turnLeft();
